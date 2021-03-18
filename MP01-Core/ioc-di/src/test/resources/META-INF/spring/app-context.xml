@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <bean id="encyclopedia" class="com.apress.spring.framework.core.ioc.di.out.Encyclopedia"/>
+  <bean id="oracle" name="wiseworm" class="com.apress.spring.framework.core.ioc.di.out.BookworkOracle"
+        c:encyclopedia-ref="encyclopedia"/>
+
+  <bean id="xmlMsg" class="com.apress.spring.framework.core.ioc.di.xml.ConfigurableMessageProvider"
+        c:message="I hope that someone gets my message in a bottle"/>
+
+
+  <bean id="confusion" class="com.apress.spring.framework.core.ioc.di.xml.ConstructorConfusion"
+        c:someNumber="2"/>
+
+  <!-- Inject Simple -->
+
+  <bean id="injectSimple" class="com.apress.spring.framework.core.ioc.di.xml.InjectSimple"
+        p:name="John Mayer"
+        p:age="39"
+        p:height="1.92"
+        p:programmer="false"
+        p:ageInSeconds="1241401112"/>
+
+  <bean id="injectSimpleSpEl" class="com.apress.spring.framework.core.ioc.di.xml.InjectSimple"
+        p:name="#{injectSimpleConfig.name}"
+        p:age="#{injectSimpleConfig.age + 1}"
+        p:height="#{injectSimpleConfig.height}"
+        p:programmer="#{injectSimpleConfig.programmer}"
+        p:ageInSeconds="#{injectSimpleConfig.ageInSeconds}"/>
+
+
+  <bean id="injectSimpleConfig" class="com.apress.spring.framework.core.ioc.di.annotated.InjectSimpleConfig"/>
+
+
+</beans>
